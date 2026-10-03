@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thanveer & Sidra Wedding</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #f7f9fa;
+      --card-bg: #ffffff;
+      --accent-color: #5c7285;
+      --text-dark: #2c3e50;
+      --text-muted: #7f8c8d;
+      --gold-accent: #c5a880;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-dark);
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .serif-font {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    #curtain-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(135deg, #e4ecf0 0%, #cbd9e1 100%);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
+      padding: 20px;
+    }
+
+    #curtain-screen.opened {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .curtain-monogram {
+      font-size: 3.5rem;
+      color: var(--accent-color);
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+    }
+
+    .open-btn {
+      background-color: var(--accent-color);
+      color: #fff;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .open-btn:hover {
+      background-color: var(--text-dark);
+      transform: scale(1.05);
+    }
+
+    #music-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: white;
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 30px 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .couple-title {
+      font-size: 2.8rem;
+      color: var(--accent-color);
+      margin: 10px 0;
+    }
+
+    .quote-text {
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .timer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .time-box {
+      background: var(--bg-color);
+      padding: 12px 6px;
+      border-radius: 8px;
+    }
+
+    .time-val {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--accent-color);
+    }
+
+    .time-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    .event-title {
+      font-size: 1.8rem;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .event-date-time {
+      font-weight: 500;
+      color: var(--gold-accent);
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .event-venue {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .map-btn {
+      display: inline-block;
+      text-decoration: none;
+      background: var(--accent-color);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: background 0.3s ease;
+    }
+
+    .map-btn:hover {
+      background: var(--text-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="bg-audio" loop src="https://assets.mixkit.co/music/preview/mixkit-romantic-moment-1111.mp3"></audio>
+
+  <button id="music-btn" title="Toggle Music">🎵</button>
+
+  <div id="curtain-screen">
+    <div class="serif-font curtain-monogram">T & S</div>
+    <p style="letter-spacing: 2px; margin-bottom: 24px; color: var(--text-muted);">YOU ARE INVITED</p>
+    <button class="open-btn" id="open-btn">Open Invitation</button>
+  </div>
+
+  <main class="container">
+
+    <section class="section-card">
+      <p style="letter-spacing: 3px; font-size: 0.75rem; text-transform: uppercase; color: var(--gold-accent);">
+        The Wedding Celebration of
+      </p>
+
+      <h1 class="couple-title">Thanveer & Sidra</h1>
+
+      <p class="quote-text serif-font">
+        "And We created you in pairs."<br>(Surah An-Naba 78:8)
+      </p>
+    </section>
+
+    <section class="section-card">
+      <h3 style="letter-spacing: 2px; font-size: 0.9rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;">
+        Counting Down to Forever
+      </h3>
+      <div class="timer-grid">
+        <div class="time-box">
+          <div class="time-val" id="days">00</div>
+          <div class="time-label">Days</div>
+        </div>
+        <div class="time-box">
+          <div class="time-val" id="hours">00</div>
+          <div class="time-label">Hours</div>
+        </div>
+        <div class="time-box">
+          <div class="time-val" id="minutes">00</div>
+          <div class="time-label">Mins</div>
+        </div>
+        <div class="time-box">
+          <div class="time-val" id="seconds">00</div>
+          <div class="time-label">Secs</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2 class="event-title">Wedding Ceremony / Nikkah</h2>
+      <p class="event-date-time">Sunday, November 22, 2026 • 11:30 AM</p>
+      <p class="event-venue">
+        Grand Palace Convention Center<br>
+        Main Highway Road, City Center
+      </p>
+      <a class="map-btn" href="https://maps.google.com" target="_blank" rel="noopener noreferrer">
+        📍 View on Google Maps
+      </a>
+    </section>
+
+    <section class="section-card">
+      <h2 class="event-title">Reception Dinner</h2>
+      <p class="event-date-time">Sunday, November 22, 2026 • 07:00 PM</p>
+      <p class="event-venue">
+        The Royal Ballroom<br>
+        Lotus Avenue, City Center
+      </p>
+      <a class="map-btn" href="https://maps.google.com" target="_blank" rel="noopener noreferrer">
+        📍 View on Google Maps
+      </a>
+    </section>
+
+  </main>
+
+  <script>
+    const curtain = document.getElementById('curtain-screen');
+    const openBtn = document.getElementById('open-btn');
+    const audio = document.getElementById('bg-audio');
+    const musicBtn = document.getElementById('music-btn');
+
+    openBtn.addEventListener('click', () => {
+      curtain.classList.add('opened');
+      audio.play().catch(e => console.log('Audio autoplay prevented:', e));
+    });
+
+    musicBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play().catch(e => console.log('Audio playback prevented:', e));
+        musicBtn.textContent = '🎵';
+      } else {
+        audio.pause();
+        musicBtn.textContent = '🔇';
+      }
+    });
+
+    const targetDate = new Date("2026-11-22T11:30:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference <= 0) {
+        document.getElementById("days").innerText = "00";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
+        document.getElementById("seconds").innerText = "00";
+        return;
+      }
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = String(days).padStart(2, '0');
+      document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+      document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+      document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
