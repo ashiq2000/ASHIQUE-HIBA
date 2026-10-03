@@ -3,54 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thanveer & Sidra Wedding</title>
+  <meta name="theme-color" content="#f8f5e9" />
+  <title>Ashique Usman & Hiba Mariyam | Wedding Invitation</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-color: #f7f9fa;
-      --card-bg: #ffffff;
-      --accent-color: #5c7285;
-      --text-dark: #2c3e50;
-      --text-muted: #7f8c8d;
-      --gold-accent: #c5a880;
+      --cream: #faf8ee;
+      --cream-dark: #f1edda;
+      --green: #063f2a;
+      --green-soft: #174d39;
+      --gold: #b99643;
+      --gold-light: #d4bb76;
+      --text: #123d2d;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-dark);
+      min-height: 100vh;
+      font-family: "Cormorant Garamond", serif;
+      background: var(--cream);
+      color: var(--text);
       text-align: center;
       overflow-x: hidden;
     }
 
-    h1, h2, h3, .serif-font {
-      font-family: 'Cormorant Garamond', serif;
-    }
-
+    /* ---------- INTRO SCREEN ---------- */
     #curtain-screen {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      background: linear-gradient(135deg, #e4ecf0 0%, #cbd9e1 100%);
+      inset: 0;
       z-index: 9999;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
-      padding: 20px;
+      background:
+        radial-gradient(circle at 50% 45%, #fffdf5 0%, #f5f0dd 55%, #e9e2c9 100%);
+      transition: transform 1.35s cubic-bezier(.77,0,.175,1), opacity .9s ease;
+    }
+
+    #curtain-screen::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid var(--gold);
+      pointer-events: none;
     }
 
     #curtain-screen.opened {
@@ -59,266 +61,564 @@
       pointer-events: none;
     }
 
-    .curtain-monogram {
-      font-size: 3.5rem;
-      color: var(--accent-color);
+    .intro-content {
+      position: relative;
+      z-index: 1;
+      padding: 30px;
+    }
+
+    .intro-small {
+      font-family: Montserrat, sans-serif;
+      font-size: .7rem;
       letter-spacing: 4px;
-      margin-bottom: 20px;
+      color: var(--green);
+      margin-bottom: 18px;
+    }
+
+    .intro-monogram {
+      font-family: "Great Vibes", cursive;
+      color: var(--green);
+      font-size: 5rem;
+      line-height: 1;
+      margin-bottom: 18px;
+    }
+
+    .intro-line {
+      width: 120px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 22px;
+    }
+
+    .intro-names {
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      color: var(--green);
+      margin-bottom: 30px;
     }
 
     .open-btn {
-      background-color: var(--accent-color);
-      color: #fff;
-      border: none;
-      padding: 14px 32px;
-      border-radius: 50px;
-      font-size: 0.95rem;
+      border: 1px solid var(--gold);
+      background: var(--green);
+      color: white;
+      padding: 14px 30px;
+      border-radius: 2px;
+      font-family: Montserrat, sans-serif;
+      font-size: .72rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
+      transition: .3s ease;
     }
 
     .open-btn:hover {
-      background-color: var(--text-dark);
-      transform: scale(1.05);
+      background: var(--green-soft);
+      transform: translateY(-2px);
     }
 
-    #music-btn {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 48px;
-      height: 48px;
+    /* ---------- MAIN PAGE ---------- */
+    .page {
+      width: min(100%, 760px);
+      margin: auto;
+      padding: 24px 16px 70px;
+    }
+
+    .invitation {
+      position: relative;
+      min-height: 100vh;
+      background: var(--cream);
+      border: 1px solid var(--gold);
+      box-shadow: 0 15px 45px rgba(50, 55, 30, .08);
+      overflow: hidden;
+    }
+
+    .invitation::before,
+    .invitation::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
-      background: white;
-      border: 1px solid #ddd;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      z-index: 1000;
+      opacity: .12;
+      pointer-events: none;
+    }
+
+    .invitation::before {
+      top: -75px;
+      left: -75px;
+      background: var(--gold);
+    }
+
+    .invitation::after {
+      bottom: -75px;
+      right: -75px;
+      background: var(--green);
+    }
+
+    .corner {
+      position: absolute;
+      width: 145px;
+      height: 145px;
+      pointer-events: none;
+      opacity: .9;
+    }
+
+    .corner::before,
+    .corner::after {
+      content: "";
+      position: absolute;
+      border-radius: 100% 0 100% 0;
+      transform: rotate(-25deg);
+    }
+
+    .corner::before {
+      width: 72px;
+      height: 30px;
+      background: #7e9b68;
+    }
+
+    .corner::after {
+      width: 45px;
+      height: 20px;
+      background: #a7bd8f;
+    }
+
+    .corner-top {
+      top: -8px;
+      left: -5px;
+      transform: rotate(20deg);
+    }
+
+    .corner-top::before { top: 32px; left: 15px; }
+    .corner-top::after { top: 62px; left: 45px; transform: rotate(18deg); }
+
+    .corner-bottom {
+      bottom: -10px;
+      right: -5px;
+      transform: rotate(200deg);
+    }
+
+    .corner-bottom::before { top: 32px; left: 15px; }
+    .corner-bottom::after { top: 62px; left: 45px; transform: rotate(18deg); }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: 65px 30px 75px;
+    }
+
+    /* ---------- DECORATIVE ELEMENTS ---------- */
+    .arabic {
+      font-family: "Times New Roman", serif;
+      font-size: clamp(2rem, 8vw, 3.4rem);
+      line-height: 1.4;
+      color: var(--green);
+      direction: rtl;
+      margin-bottom: 4px;
+    }
+
+    .bismillah {
+      font-family: Montserrat, sans-serif;
+      letter-spacing: 5px;
+      font-size: clamp(.8rem, 3vw, 1rem);
+      color: var(--green);
+      margin-bottom: 34px;
+    }
+
+    .gold-divider {
       display: flex;
       align-items: center;
+      gap: 13px;
       justify-content: center;
-      cursor: pointer;
-      font-size: 1.2rem;
+      margin: 22px auto;
+      max-width: 330px;
     }
 
-    .container {
+    .gold-divider span {
+      height: 1px;
+      flex: 1;
+      background: var(--gold);
+    }
+
+    .gold-divider i {
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      transform: rotate(45deg);
+    }
+
+    .invited {
+      font-family: Montserrat, sans-serif;
+      font-size: clamp(.75rem, 2.8vw, 1rem);
+      line-height: 1.9;
+      letter-spacing: 3px;
+      color: var(--green);
+      text-transform: uppercase;
       max-width: 500px;
       margin: 0 auto;
-      padding: 40px 20px 80px;
     }
 
-    .section-card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 30px 24px;
-      margin-bottom: 24px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
-      border: 1px solid rgba(0,0,0,0.03);
+    .wedding-of {
+      margin-top: 5px;
+      font-family: Montserrat, sans-serif;
+      letter-spacing: 4px;
+      font-size: .72rem;
+      color: var(--green);
+      text-transform: uppercase;
     }
 
-    .couple-title {
-      font-size: 2.8rem;
-      color: var(--accent-color);
+    .name {
+      font-family: "Great Vibes", cursive;
+      color: var(--green);
+      font-size: clamp(3.4rem, 12vw, 6rem);
+      line-height: .95;
+      font-weight: 400;
+      margin: 18px 0 8px;
+    }
+
+    .family {
+      font-size: clamp(1.05rem, 4vw, 1.35rem);
+      line-height: 1.35;
+      color: var(--green-soft);
+    }
+
+    .location-line {
+      font-size: clamp(1rem, 3.8vw, 1.2rem);
+      margin-top: 3px;
+      color: var(--green-soft);
+    }
+
+    .heart {
+      color: var(--gold);
+      font-size: 1.7rem;
       margin: 10px 0;
     }
 
-    .quote-text {
-      font-style: italic;
-      color: var(--text-muted);
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    .timer-grid {
+    .date-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 20px;
+      max-width: 500px;
+      margin: 45px auto 35px;
+    }
+
+    .date-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       gap: 8px;
-      margin-top: 15px;
     }
 
-    .time-box {
-      background: var(--bg-color);
-      padding: 12px 6px;
+    .date-icon {
+      width: 42px;
+      height: 42px;
+      border: 3px solid var(--green);
       border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-family: Montserrat, sans-serif;
+      font-size: 1.1rem;
+      color: var(--green);
     }
 
-    .time-val {
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: var(--accent-color);
+    .date-value {
+      font-size: clamp(1.25rem, 5vw, 1.65rem);
+      color: var(--green);
     }
 
-    .time-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      letter-spacing: 1px;
+    .date-separator {
+      height: 65px;
+      width: 1px;
+      background: var(--gold);
     }
 
-    .event-title {
-      font-size: 1.8rem;
-      color: var(--text-dark);
-      margin-bottom: 6px;
+    .venue-icon {
+      color: var(--green);
+      font-size: 2.3rem;
+      margin-bottom: 2px;
     }
 
-    .event-date-time {
-      font-weight: 500;
-      color: var(--gold-accent);
-      margin-bottom: 12px;
-      letter-spacing: 1px;
+    .venue-name {
+      font-size: clamp(1.7rem, 6vw, 2.5rem);
+      color: var(--green);
+      margin-bottom: 8px;
     }
 
-    .event-venue {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 20px;
+    .venue-address {
+      font-size: clamp(1rem, 4vw, 1.3rem);
+      line-height: 1.35;
+      color: var(--green-soft);
     }
 
     .map-btn {
       display: inline-block;
+      margin-top: 22px;
+      padding: 12px 25px;
+      background: var(--green);
+      color: white;
       text-decoration: none;
-      background: var(--accent-color);
-      color: #fff;
-      padding: 12px 28px;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      letter-spacing: 1px;
+      font-family: Montserrat, sans-serif;
+      font-size: .7rem;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      transition: background 0.3s ease;
+      border-radius: 30px;
+      transition: .3s ease;
     }
 
-    .map-btn:hover {
-      background: var(--text-dark);
+    .map-btn:hover { transform: translateY(-2px); background: var(--green-soft); }
+
+    /* ---------- COUNTDOWN ---------- */
+    .countdown-card {
+      margin: 48px auto 0;
+      max-width: 560px;
+      padding: 24px 18px;
+      border-top: 1px solid var(--gold);
+      border-bottom: 1px solid var(--gold);
+    }
+
+    .countdown-title {
+      font-family: Montserrat, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: .72rem;
+      color: var(--green);
+      margin-bottom: 18px;
+    }
+
+    .timer {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .timer-box strong {
+      display: block;
+      font-size: clamp(1.8rem, 7vw, 2.5rem);
+      font-weight: 500;
+      color: var(--green);
+    }
+
+    .timer-box small {
+      font-family: Montserrat, sans-serif;
+      font-size: .58rem;
+      letter-spacing: 1.5px;
+      color: #71816f;
+      text-transform: uppercase;
+    }
+
+    /* ---------- MUSIC ---------- */
+    #music-btn {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 1000;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      background: var(--cream);
+      color: var(--green);
+      box-shadow: 0 5px 18px rgba(0,0,0,.14);
+      cursor: pointer;
+      font-size: 1.15rem;
+    }
+
+    .footer {
+      margin-top: 45px;
+      font-family: Montserrat, sans-serif;
+      font-size: .62rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #71816f;
+    }
+
+    @media (max-width: 480px) {
+      .page { padding: 0; }
+      .invitation { border-left: 0; border-right: 0; }
+      .content { padding: 48px 20px 65px; }
+      .corner { transform: scale(.8); }
+      .date-grid { gap: 10px; }
     }
   </style>
 </head>
+
 <body>
 
+  <!-- Background music. You can replace this URL with your own MP3. -->
   <audio id="bg-audio" loop src="https://assets.mixkit.co/music/preview/mixkit-romantic-moment-1111.mp3"></audio>
+
+  <!-- Opening screen -->
+  <div id="curtain-screen">
+    <div class="intro-content">
+      <div class="intro-small">YOU ARE CORDIALLY INVITED</div>
+      <div class="intro-monogram">A &amp; H</div>
+      <div class="intro-line"></div>
+      <div class="intro-names">ASHIQUE &amp; HIBA</div>
+      <button class="open-btn" id="open-btn">Open Invitation</button>
+    </div>
+  </div>
 
   <button id="music-btn" title="Toggle Music">🎵</button>
 
-  <div id="curtain-screen">
-    <div class="serif-font curtain-monogram">T & S</div>
-    <p style="letter-spacing: 2px; margin-bottom: 24px; color: var(--text-muted);">YOU ARE INVITED</p>
-    <button class="open-btn" id="open-btn">Open Invitation</button>
-  </div>
+  <main class="page">
+    <article class="invitation">
 
-  <main class="container">
+      <div class="corner corner-top"></div>
+      <div class="corner corner-bottom"></div>
 
-    <section class="section-card">
-      <p style="letter-spacing: 3px; font-size: 0.75rem; text-transform: uppercase; color: var(--gold-accent);">
-        The Wedding Celebration of
-      </p>
+      <div class="content">
 
-      <h1 class="couple-title">Thanveer & Sidra</h1>
+        <!-- BISMILLAH -->
+        <div class="arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+        <div class="bismillah">BISMILLAHI RAHMANI RAHEEM</div>
 
-      <p class="quote-text serif-font">
-        "And We created you in pairs."<br>(Surah An-Naba 78:8)
-      </p>
-    </section>
-
-    <section class="section-card">
-      <h3 style="letter-spacing: 2px; font-size: 0.9rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;">
-        Counting Down to Forever
-      </h3>
-      <div class="timer-grid">
-        <div class="time-box">
-          <div class="time-val" id="days">00</div>
-          <div class="time-label">Days</div>
+        <div class="gold-divider">
+          <span></span><i></i><span></span>
         </div>
-        <div class="time-box">
-          <div class="time-val" id="hours">00</div>
-          <div class="time-label">Hours</div>
+
+        <!-- INVITATION TEXT -->
+        <p class="invited">
+          Together with their families<br>
+          we cordially invite you to the<br>
+          wedding of
+        </p>
+
+        <!-- GROOM -->
+        <p class="name">Ashique Usman PK</p>
+        <p class="family">S/o Mr &amp; Mrs Muhammad Iqbal</p>
+        <p class="location-line">Peedikakandy<br>Thondayad, Kozhikode</p>
+
+        <div class="heart">♥</div>
+
+        <!-- BRIDE -->
+        <p class="name">Hiba Mariyam</p>
+        <p class="family">D/o Mr &amp; Mrs Aboobakkar</p>
+        <p class="location-line">Koyilandy, Kozhikode</p>
+
+        <!-- DATE & TIME -->
+        <div class="date-grid">
+          <div class="date-item">
+            <div class="date-icon">▦</div>
+            <div class="date-value">13 December 2026</div>
+          </div>
+
+          <div class="date-separator"></div>
+
+          <div class="date-item">
+            <div class="date-icon">◷</div>
+            <div class="date-value">12.00 pm</div>
+          </div>
         </div>
-        <div class="time-box">
-          <div class="time-val" id="minutes">00</div>
-          <div class="time-label">Mins</div>
+
+        <!-- VENUE -->
+        <div class="venue-icon">📍</div>
+        <h2 class="venue-name">Miami Convention Centre</h2>
+        <p class="venue-address">
+          Kozhikode-Kuttiyadi Road<br>
+          Thalakkulathur, Kozhikode<br>
+          Kerala 673317
+        </p>
+
+        <a
+          class="map-btn"
+          href="https://maps.app.goo.gl/hvXiQG6cCJDYB3SbA?g_st=ac"
+          target="_blank"
+          rel="noopener noreferrer">
+          📍 View on Google Maps
+        </a>
+
+        <!-- COUNTDOWN -->
+        <div class="countdown-card">
+          <div class="countdown-title">Counting Down to Our Special Day</div>
+
+          <div class="timer">
+            <div class="timer-box">
+              <strong id="days">00</strong>
+              <small>Days</small>
+            </div>
+            <div class="timer-box">
+              <strong id="hours">00</strong>
+              <small>Hours</small>
+            </div>
+            <div class="timer-box">
+              <strong id="minutes">00</strong>
+              <small>Minutes</small>
+            </div>
+            <div class="timer-box">
+              <strong id="seconds">00</strong>
+              <small>Seconds</small>
+            </div>
+          </div>
         </div>
-        <div class="time-box">
-          <div class="time-val" id="seconds">00</div>
-          <div class="time-label">Secs</div>
+
+        <div class="gold-divider" style="margin-top:45px;">
+          <span></span><i></i><span></span>
         </div>
+
+        <p class="footer">With love, Ashique &amp; Hiba</p>
+
       </div>
-    </section>
-
-    <section class="section-card">
-      <h2 class="event-title">Wedding Ceremony / Nikkah</h2>
-      <p class="event-date-time">Sunday, November 22, 2026 • 11:30 AM</p>
-      <p class="event-venue">
-        Grand Palace Convention Center<br>
-        Main Highway Road, City Center
-      </p>
-      <a class="map-btn" href="https://maps.google.com" target="_blank" rel="noopener noreferrer">
-        📍 View on Google Maps
-      </a>
-    </section>
-
-    <section class="section-card">
-      <h2 class="event-title">Reception Dinner</h2>
-      <p class="event-date-time">Sunday, November 22, 2026 • 07:00 PM</p>
-      <p class="event-venue">
-        The Royal Ballroom<br>
-        Lotus Avenue, City Center
-      </p>
-      <a class="map-btn" href="https://maps.google.com" target="_blank" rel="noopener noreferrer">
-        📍 View on Google Maps
-      </a>
-    </section>
-
+    </article>
   </main>
 
   <script>
-    const curtain = document.getElementById('curtain-screen');
-    const openBtn = document.getElementById('open-btn');
-    const audio = document.getElementById('bg-audio');
-    const musicBtn = document.getElementById('music-btn');
+    // ---------- OPEN INVITATION + MUSIC ----------
+    const curtain = document.getElementById("curtain-screen");
+    const openBtn = document.getElementById("open-btn");
+    const audio = document.getElementById("bg-audio");
+    const musicBtn = document.getElementById("music-btn");
 
-    openBtn.addEventListener('click', () => {
-      curtain.classList.add('opened');
-      audio.play().catch(e => console.log('Audio autoplay prevented:', e));
+    openBtn.addEventListener("click", () => {
+      curtain.classList.add("opened");
+      audio.play().then(() => {
+        musicBtn.textContent = "🎵";
+      }).catch(() => {
+        musicBtn.textContent = "🔇";
+      });
     });
 
-    musicBtn.addEventListener('click', () => {
+    musicBtn.addEventListener("click", () => {
       if (audio.paused) {
-        audio.play().catch(e => console.log('Audio playback prevented:', e));
-        musicBtn.textContent = '🎵';
+        audio.play().then(() => {
+          musicBtn.textContent = "🎵";
+        }).catch(() => {});
       } else {
         audio.pause();
-        musicBtn.textContent = '🔇';
+        musicBtn.textContent = "🔇";
       }
     });
 
-    const targetDate = new Date("2026-11-22T11:30:00").getTime();
+    // ---------- COUNTDOWN ----------
+    // 13 December 2026, 12:00 PM (local time)
+    const targetDate = new Date("2026-12-13T12:00:00");
 
     function updateCountdown() {
-      const now = new Date().getTime();
-      const difference = targetDate - now;
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
 
       if (difference <= 0) {
-        document.getElementById("days").innerText = "00";
-        document.getElementById("hours").innerText = "00";
-        document.getElementById("minutes").innerText = "00";
-        document.getElementById("seconds").innerText = "00";
+        document.getElementById("days").textContent = "00";
+        document.getElementById("hours").textContent = "00";
+        document.getElementById("minutes").textContent = "00";
+        document.getElementById("seconds").textContent = "00";
         return;
       }
 
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      const days = Math.floor(difference / 86400000);
+      const hours = Math.floor((difference % 86400000) / 3600000);
+      const minutes = Math.floor((difference % 3600000) / 60000);
+      const seconds = Math.floor((difference % 60000) / 1000);
 
-      document.getElementById("days").innerText = String(days).padStart(2, '0');
-      document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-      document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-      document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+      document.getElementById("days").textContent = String(days).padStart(2, "0");
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
     }
 
-    setInterval(updateCountdown, 1000);
     updateCountdown();
+    setInterval(updateCountdown, 1000);
   </script>
+
 </body>
 </html>
